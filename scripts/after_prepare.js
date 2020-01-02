@@ -96,7 +96,12 @@ module.exports = function (context) {
         Utilities.copyKey(PLATFORM.ANDROID);
 
         if(!fs.existsSync(path.resolve(PLATFORM.ANDROID.colorsXml.target))){
-            fs.copyFileSync(path.resolve(PLATFORM.ANDROID.colorsXml.src), path.resolve(PLATFORM.ANDROID.colorsXml.target));
+            // fs.copyFileSync(path.resolve(PLATFORM.ANDROID.colorsXml.src), path.resolve(PLATFORM.ANDROID.colorsXml.target));
+            fs.writeFileSync(
+                path.resolve(PLATFORM.ANDROID.colorsXml.target),
+                fs.readFileSync(path.resolve(PLATFORM.ANDROID.colorsXml.src), 'utf-8'),
+                'utf-8'
+            );
         }
 
         const $colorsXml = Utilities.parseXmlFileToJson(PLATFORM.ANDROID.colorsXml.target, {compact: true});
